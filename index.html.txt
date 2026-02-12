@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pour Océane 💖</title>
+    <!-- Importation de polices Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary-color: #ff4d6d;
+            --secondary-color: #ff8fa3;
+            --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #fff5f8 100%);
+            --text-color: #590d22;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- BACKGROUND ANIMATION (FLOATING HEARTS) --- */
+        .bg-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-heart {
+            position: absolute;
+            bottom: -100px;
+            color: rgba(255, 77, 109, 0.2);
+            font-size: 2rem;
+            animation: floatUp 15s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- LAYOUT & CONTAINERS --- */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .screen {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .hidden {
+            display: none !important;
+            opacity: 0;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #a4133c;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        /* --- PHOTO COLLAGE --- */
+        .photo-collage {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .photo-frame {
+            width: 100px;
+            height: 120px;
+            background-color: #fff;
+            padding: 5px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transform: rotate(-5deg);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-frame:nth-child(2) { transform: rotate(3deg) translateY(-10px); }
+        .photo-frame:nth-child(3) { transform: rotate(-3deg); }
+
+        .photo-frame:hover {
+            transform: scale(1.1) rotate(0deg);
+            z-index: 20;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            object-fit: cover;
+        }
+        
+        /* If user puts real images */
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-group {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-yes {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-yes:hover {
+            background: #d90429;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 77, 109, 0.6);
+        }
+
+        .btn-no {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-no:hover {
+            background: #fff0f3;
+        }
+
+        .btn-back {
+            margin-top: 2rem;
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+        }
+
+        /* --- ERROR MESSAGE (NON) --- */
+        .error-message {
+            margin-top: 1.5rem;
+            color: #d00000;
+            font-weight: bold;
+            min-height: 24px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* --- LYRICS CARD --- */
+        .lyrics-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            max-width: 600px;
+            width: 100%;
+            max-height: 60vh;
+            overflow-y: auto;
+            text-align: left;
+            border: 4px solid var(--secondary-color);
+            position: relative;
+        }
+
+        .lyrics-content {
+            white-space: pre-line; /* Preserves line breaks */
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .lyrics-content strong {
+            color: var(--primary-color);
+            display: block;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+        }
+
+        /* Custom Scrollbar */
+        .lyrics-card::-webkit-scrollbar {
+            width: 8px;
+        }
+        .lyrics-card::-webkit-scrollbar-track {
+            background: #fff0f3;
+            border-radius: 10px;
+        }
+        .lyrics-card::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+            border-radius: 10px;
+        }
+
+        /* --- ANIMATIONS --- */
+        .shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Confetti Canvas */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* Music Toggle */
+        .music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            z-index: 100;
+            font-size: 1.5rem;
+            border: 2px solid var(--primary-color);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Mobile specific adjustments */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .photo-frame { width: 80px; height: 100px; }
+            .btn-group { flex-direction: column; gap: 1rem; width: 100%; }
+            .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Animation Elements -->
+    <div class="bg-hearts" id="bgHearts"></div>
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Audio Player -->
+    <audio id="bg-music" loop>
+        <!-- 
+             INSTRUCTION MUSIQUE :
+             1. Mettez votre fichier MP3 dans le même dossier que ce fichier.
+             2. Nommez-le "song.mp3" OU modifiez le nom ci-dessous.
+        -->
+        <source src="./song.mp3" type="audio/mpeg">
+        <!-- Fallback if audio file is missing, silent but present for logic -->
+    </audio>
+    <div class="music-toggle" id="musicToggle" title="Activer/Désactiver la musique">🔇</div>
+
+    <div class="container">
+        
+        <!-- SCREEN 1: LANDING -->
+        <div id="screen-landing" class="screen">
+            
+            <!-- Photo Collage Area -->
+            <div class="photo-collage">
+                
+                <!-- PHOTO 1 -->
+                <div class="photo-frame">
+                    <div class="photo-placeholder">
+                        <!-- 
+                             INSTRUCTION PHOTO 1 :
+                             Remplacez src="./img1.jpg" par le nom de votre première image 
+                             (ex: src="./maphoto.jpg") ou renommez votre image "img1.jpg" 
+                        -->
+                        <img src="./img1.jpg" onerror="this.style.display='none'" alt="Nous 1">
+                        <span style="font-size:12px; position:absolute;">Toi & Moi</span>
+                    </div>
+                </div>
+
+                <!-- PHOTO 2 -->
+                <div class="photo-frame">
+                    <div class="photo-placeholder">
+                        <!-- INSTRUCTION PHOTO 2 -->
+                        <img src="./img2.jpg" onerror="this.style.display='none'" alt="Nous 2">
+                        <span>❤️</span>
+                    </div>
+                </div>
+
+                <!-- PHOTO 3 -->
+                <div class="photo-frame">
+                    <div class="photo-placeholder">
+                        <!-- INSTRUCTION PHOTO 3 -->
+                        <img src="./img3.jpg" onerror="this.style.display='none'" alt="Nous 3">
+                        <span style="font-size:12px; position:absolute;">Souvenirs</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Texts -->
+            <h1>Océane veux tu être ma valentine ?</h1>
+            <div class="subtitle">NB : si tu dis oui il y a une surprise qui t'attend</div>
+
+            <!-- Buttons -->
+            <div class="btn-group">
+                <button id="btn-oui" class="btn btn-yes" aria-label="Dire Oui">OUI 😍</button>
+                <button id="btn-non" class="btn btn-no" aria-label="Dire Non">NON 😢</button>
+            </div>
+
+            <!-- Error Message for No -->
+            <div id="error-msg" class="error-message">mauvais bouton réfléchis encore</div>
+        </div>
+
+        <!-- SCREEN 2: SURPRISE -->
+        <div id="screen-surprise" class="screen hidden">
+            <h1>Ma chanson pour toi, Océane 💖</h1>
+            
+            <div class="lyrics-card">
+                <div id="lyrics-content" class="lyrics-content">
+                    <!-- Lyrics will be injected here by JS -->
+                </div>
+            </div>
+
+            <button id="btn-back" class="btn btn-back">Revenir</button>
+        </div>
+
+    </div>
+
+    <script>
+        // --- DATA: LYRICS ---
+        const LYRICS = `
+        ** (Intro) **
+        Yeah...
+        C’est pour toi, mon cœur.
+        C'est Yann qui te parle.
+        Juste pour toi, Océane.
+        Écoute ça.
+
+        ** (Couplet 1) **
+        Je me souviens de cette date comme si c'était hier
+        Le 18 mai 2019, une lumière.
+        Ce jour est béni, gravé dans mon histoire
+        Le début de notre plus belle victoire.
+        Ça fait sept ans qu'on se connaît, toi et moi
+        Cinq ans qu'on avance ensemble, avec la même foi.
+        Tu es ma grâce, ma plus belle bénédiction
+        La meilleure chose qui me soit arrivée, sans condition.
+        T’es entrée dans ma vie, t’as tout réparé
+        Mon cœur ne bat que pour t’aimer.
+
+        ** (Refrain) **
+        Océane, mon amour, ma divine
+        Dis-moi, est-ce que tu veux être ma Valentine ?
+        Même si les kilomètres nous séparent ce soir
+        Nos cœurs battent à l'unisson, garde l’espoir.
+        Je t’aime plus que tout, c’est ma vérité
+        Tu es la femme avec qui je veux tout partager.
+        Ma Valentine, c’est toi, juste toi
+        Pour la vie, pour l’éternité, c’est notre loi.
+
+        ** (Couplet 2) **
+        On a traversé des tempêtes, des hauts et des bas
+        Mais on s'est toujours choisis, on ne lâche pas.
+        Contre vents et marées, notre amour est solide
+        Sans toi à mes côtés, le monde semble vide.
+        Je sais que je te manque, et toi tu me manques tant
+        La distance est dure, mais ce n'est qu'un moment.
+        Bientôt je serai là, pour sécher tes larmes
+        Pour te serrer fort et déposer les armes.
+        T’es intelligente, t’es forte, t’es incroyable
+        Une beauté rare, une femme inoubliable.
+
+        ** (Refrain) **
+        Océane, mon amour, ma divine
+        Dis-moi, est-ce que tu veux être ma Valentine ?
+        Même si les kilomètres nous séparent ce soir
+        Nos cœurs battent à l'unisson, garde l’espoir.
+        Je t’aime plus que tout, c’est ma vérité
+        Tu es la femme avec qui je veux tout partager.
+        Ma Valentine, c’est toi, juste toi
+        Pour la vie, pour l’éternité, c’est notre loi.
+
+        ** (Pont) **
+        Merci d’être là, d’être toujours présente
+        Même quand la vie devient un peu pesante.
+        Je ne vois mon avenir qu'à travers tes yeux
+        Un jour tout construire avec toi, c’est mon seul vœu.
+        Je compte les jours, je compte les heures
+        Pour retrouver la chaleur de ton cœur.
+        Je t'aime, Océane.
+
+        ** (Refrain Final) **
+        Océane, mon amour, ma divine (Oh oui chérie !)
+        Dis-moi, est-ce que tu veux être ma Valentine ?
+        Même si les kilomètres nous séparent ce soir (Loin des yeux mais près du cœur)
+        Nos cœurs battent à l'unisson, garde l’espoir.
+        Je t’aime plus que tout, c’est ma vérité
+        Tu es la femme avec qui je veux tout partager.
+        Ma Valentine, c’est toi, juste toi
+        Pour la vie, pour l’éternité, c’est notre loi.
+
+        ** (Outro) **
+        Cinq ans d'amour...
+        Sept ans d'histoire...
+        Yann pour Océane.
+        Joyeuse Saint-Valentin, mon ange.
+        Tu es tout pour moi.
+        `;
+
+        // --- DOM ELEMENTS ---
+        const btnOui = document.getElementById('btn-oui');
+        const btnNon = document.getElementById('btn-non');
+        const btnBack = document.getElementById('btn-back');
+        const errorMsg = document.getElementById('error-msg');
+        const screenLanding = document.getElementById('screen-landing');
+        const screenSurprise = document.getElementById('screen-surprise');
+        const lyricsContainer = document.getElementById('lyrics-content');
+        const musicToggle = document.getElementById('musicToggle');
+        const audio = document.getElementById('bg-music');
+        const bgHeartsContainer = document.getElementById('bgHearts');
+
+        // --- FORMAT LYRICS ---
+        // Simple formatting to make headers bold
+        const formattedLyrics = LYRICS.replace(/\*\* (.*?) \*\*/g, '<strong>$1</strong>');
+        lyricsContainer.innerHTML = formattedLyrics;
+
+        // --- BACKGROUND HEARTS GENERATOR ---
+        function createHearts() {
+            const heart = document.createElement('div');
+            heart.classList.add('bg-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 5 + 10 + 's';
+            heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+            bgHeartsContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 15000);
+        }
+        setInterval(createHearts, 1000);
+
+        // --- MUSIC CONTROL ---
+        let isPlaying = false;
+        musicToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                musicToggle.innerText = '🔇';
+            } else {
+                audio.play().catch(e => console.log("Audio file missing or interaction needed"));
+                musicToggle.innerText = '🔊';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // --- "NON" BUTTON BEHAVIOR ---
+        btnNon.addEventListener('click', () => {
+            // 1. Shake animation
+            errorMsg.classList.remove('shake');
+            void errorMsg.offsetWidth; // trigger reflow
+            errorMsg.classList.add('shake');
+            
+            // 2. Show text
+            errorMsg.style.opacity = "1";
+
+            // 3. Move button randomly (Playful annoyance)
+            const randomX = (Math.random() - 0.5) * 100;
+            const randomY = (Math.random() - 0.5) * 50;
+            btnNon.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        });
+
+        // --- "OUI" BUTTON BEHAVIOR ---
+        btnOui.addEventListener('click', () => {
+            // Play music if not already playing
+            if (!isPlaying) {
+                audio.volume = 0.5;
+                audio.play().catch(() => {}); // catch error if no file
+                musicToggle.innerText = '🔊';
+                isPlaying = true;
+            }
+
+            // Confetti Explosion
+            startConfetti();
+
+            // Transition
+            screenLanding.style.opacity = '0';
+            setTimeout(() => {
+                screenLanding.classList.add('hidden');
+                screenSurprise.classList.remove('hidden');
+                screenSurprise.classList.add('fade-in');
+            }, 500);
+        });
+
+        // --- BACK BUTTON ---
+        btnBack.addEventListener('click', () => {
+            screenSurprise.classList.add('hidden');
+            screenLanding.classList.remove('hidden');
+            screenLanding.style.opacity = '1';
+        });
+
+        // --- CONFETTI LOGIC (Simple JS Particle System) ---
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        
+        // Resize canvas
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        function startConfetti() {
+            // Spawn 150 particles
+            for(let i=0; i<150; i++) {
+                particles.push({
+                    x: window.innerWidth / 2,
+                    y: window.innerHeight / 2,
+                    vx: (Math.random() - 0.5) * 15,
+                    vy: (Math.random() - 0.5) * 15 - 5, // Upward bias
+                    color: `hsl(${Math.random() * 360}, 100%, 70%)`,
+                    size: Math.random() * 8 + 4,
+                    life: 200 // Frames to live
+                });
+            }
+            animateConfetti();
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for(let i=0; i<particles.length; i++) {
+                let p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.2; // Gravity
+                p.life--;
+                p.size *= 0.99; // Shrink
+
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                if(p.life <= 0 || p.size < 0.5) {
+                    particles.splice(i, 1);
+                    i--;
+                }
+            }
+
+            if(particles.length > 0) {
+                requestAnimationFrame(animateConfetti);
+            }
+        }
+    </script>
+</body>
+</html>
